@@ -3,16 +3,10 @@ const express = require('express');
 const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
+const {
+    spawn
+} = require('child_process');
 
-//where our routes exist ./api/routes
-const productRoute = require('./api/routes/products');
-const orderRoute = require('./api/routes/orders');
-const usersRoute = require('./api/routes/user')
-mongoose.connect(`mongodb+srv://node-rest:${process.env.MONGO_KEY}@cluster0.bi2mq.mongodb.net/<dbname>?retryWrites=true&w=majority`, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
 // Console log of anything hitting our server 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({
@@ -28,15 +22,42 @@ app.use((req, res, next) => {
     );
     if (req.method === 'OPTIONS') {
         res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-        return res.status(200).json({});
     }
     next();
 });
 
-// Routes
-app.use('/products', productRoute);
-app.use('/orders', orderRoute);
-app.use('/users', usersRoute);
+app.post('/wol', (req, res) => {
+
+    // TODO: Add post password protection
+
+    // if no mac address was sent
+    if (!req.body.mac) {
+        res.status(404).json({
+            error: {
+                message: "Missing Mac Address"
+            }
+        });
+        return;
+    }
+
+    // chceking to see if its a real mac address
+    if (!req.body.mac.toString().match(/^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/g)) {
+        res.status(404).json({
+            error: {
+                message: "Incorrect Mac Address Format | Mac Address must be in format \"01:23:45:67:89:AB\""
+            }
+        });
+        return;
+    }
+
+    const wol = spawn("echo", ["lol"]);
+
+    res.status(200).json({
+        message: "Lol"
+    });
+});
+
+
 // Errrors 
 // Handle 404 not found
 app.use((req, res, next) => {
