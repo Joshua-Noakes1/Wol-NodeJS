@@ -31,10 +31,11 @@ A NodeJS based express server that has support for WakeOnLan.
     ```
 
 ## Setup
-You must create a .env file in the same folder as server.js and place your password in there (Don't use Password1234!)   
+You must create a .env file in the same folder as server.js and place your password and delay (in seconds) in there (Don't use Password1234!)   
 .env example
 ``` TEXT
     password=Password1234!
+    delay=90
 ```
 
 ## Running
