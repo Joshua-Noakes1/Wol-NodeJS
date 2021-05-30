@@ -1,22 +1,18 @@
-//loading express and morgan
-const http = require('http');
-require('dotenv').config()
-const port = process.env.port || 3001;
+// config
 const express = require('express');
 const app = express();
-const server = http.createServer(app);
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
-const wol = require('wol');
 
-server.listen(port);
-console.log(`🚀 Started server on port ${port} 🚀`);
+// components
+const wol = require('./endpoint/wol/wol');
 
-// Console log of anything hitting our server 
+// dev
 app.use(morgan('dev'));
+
 app.use(bodyParser.urlencoded({
     extended: false
-}))
+}));
 app.use(bodyParser.json());
 
 app.use((req, res, next) => {
@@ -26,69 +22,33 @@ app.use((req, res, next) => {
         "Origin, X-Requested-With, Content-Type, Accept, Authorization"
     );
     if (req.method === 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'POST');
+        res.header('Access-Control-Allow-Methods', 'GET, POST');
+        return;
     }
     next();
 });
 
-app.post('/wol', (req, res) => {
-    // TODO: Add post password protection
-    if (req.body.pass != process.env.password) {
-        res.status(404).json({
-            error: {
-                message: "Incorrect Mac Address Format | Mac Address must be in format \"01:23:45:67:89:AB\""
-            }
-        });
-        return;
-    }
 
-    // if no mac address was sent
-    if (!req.body.mac) {
-        res.status(404).json({
-            error: {
-                message: "Missing Mac Address"
-            }
-        });
-        return;
-    }
+// routes
+app.use('/wol', wol);
 
-    // chceking to see if its a good mac address
-    if (!req.body.mac.toString().match(/^([0-9A-F]{2}[:-]){5}([0-9A-F]{2})$/g)) {
-        res.status(404).json({
-            error: {
-                message: "Incorrect Mac Address Format | Mac Address must be in format \"01:23:45:67:89:AB\""
-            }
-        });
-        return;
-    }
-
-    wol.wake(`${req.body.mac}`, function (err, res) {
-        if (err) {
-            res.status(500).json({
-                error: "WakeOnLan Error",
-                message: error
-            });
-            return;
-        }
-    });
-
+app.get('/status', (req, res) => {
     res.status(200).json({
-        message: `Sent WOL request to ${req.body.mac}`
+        message: '🚀 The rocket has launched 🚀'
     });
 });
 
-// Errrors 
-// Handle 404 not found
+
+// Errors
 app.use((req, res, next) => {
-    const error = new Error('Not Found');
+    const error = new Error('❌ Not Found ❌');
     error.status = 404;
     next(error);
 });
-// Handle anything else thats not a 404 not found
 app.use((error, req, res, next) => {
     res.status(error.status || 500).json({
-        error: {
-            message: error.message
-        }
+        message: error.message
     });
 });
+
+module.exports = app;
