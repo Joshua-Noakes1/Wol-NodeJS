@@ -1,19 +1,20 @@
-var ping_await = require('ping');
+const ping_await = require('ping');
+const delay = require('delay');
 
 async function ping(ip) {
-    // stop if ip undefined
-    if (ip == undefined) return {
-        "message": false,
-        "ip": "0.0.0.0"
-    };
+    (async () => {
+        // stop if ip undefined
+        if (ip == undefined || ip == "") return false;
 
-    // ping ip and timeout after 25 seconds
-    var response = await ping_await.promise.probe(ip, {
-        timeout: 25,
-    });
+        // delay to make sure computer isnt dead before we ping it 
+        await delay(process.env.delay * 1000);
 
-    // return ip status
-    return response.alive;
+        // ping ip 
+        var response = await ping_await.promise.probe(ip);
+
+        // return ip status
+        return response.alive;
+    })();
 }
 
 module.exports = {

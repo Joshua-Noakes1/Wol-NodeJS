@@ -66,7 +66,7 @@ router.post('/', (req, res) => {
                 res.status(408).json({
                     "success": "fail",
                     "error": {
-                        "message": `Un-Successfuly sent WOL request to ${req.body.ip || response.ip} (${req.body.mac})`
+                        "message": `Un-Successfuly sent WOL request to ${req.body.ip || "0.0.0.0"} (${req.body.mac})`
                     }
                 })
                 return;
