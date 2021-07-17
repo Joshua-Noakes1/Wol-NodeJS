@@ -1,45 +1,49 @@
 # Wol-NodeJS
-A NodeJS based express server that has support for WakeOnLan.
+
+A NodeJS based express server that sends Wake On Lan packets.  
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/joshua-noakes1/Wol-NodeJS/Docker-BuildX-CI-MultiArch?style=for-the-badge) ![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/joshuanoakes1/wol-nodejs?style=for-the-badge)
 
 ## Usage
-- Get /status    
-    Using the /status endpoint you can check if Wol-NodeJS is working
-    ### Example
-    ``` JSON
-        "message": "🚀 The rocket has launched 🚀"
-    ``` 
-- Post /wol   
-    Using the /wol endpoint you can wake a device up
-    ### Client Request (Post)
-    ``` JSON
-        "pass": "Password1234!",
-        "mac": "01:23:45:67:89:AB",
-        "check": "true", (optional)
-        "ip": "192.168.10.1"
-    ```
-    ### Response 
-    #### Mac Address
-    ``` JSON
-        "success": "true",
-        "message": "Sent WOL request to 01:23:45:67:89:AB"
-    ``` 
-    #### Mac Address With check
-    ``` JSON
-        "success": "true",
-        "message": "Successfuly sent WOL request to 192.168.10.1 (01:23:45:67:89:AB)"
-            
-    ```
 
-## Setup
-You must create a .env file in the same folder as server.js and place your password and delay (in seconds) in there (Don't use Password1234!)   
-.env example
-``` TEXT
-    password=Password1234!
-    delay=90
+### POST /wol - Wake On Lan
+
+```json
+{
+  "password": "Pa55Word!",
+  "macAddress": "01:23:45:67:89:AB"
+}
 ```
 
-## Running
-Launch Wol-NodeJS with npm
-``` SHELL
-    npm run start
+### POST /check - Check if a client is alive
+
+```json
+{
+  "password": "Pa55Word!",
+  "ipAddress": "192.168.10.30"
+}
+```
+
+## Install
+
+Github Actions builds a docker image for Arm32, Arm64 and Amd64 from the NodeJS 16-slim Image.
+
+### Docker run
+
+```shell
+    docker run -d --name Wol-NodeJS --restart=unless-stopped -e password=Pa55Word! -p 3000:3000 joshuanoakes1/wol-nodejs
+```
+
+### Docker Compose (recomended)
+
+```yaml
+version: "3"
+services:
+  wol-nodejs:
+    image: joshuanoakes1/wol-nodejs:latest
+    container_name: wol-nodejs
+    restart: unless-stopped
+    environment:
+      - password: Pa55Word!
+    ports:
+      - 3000:3000
 ```
