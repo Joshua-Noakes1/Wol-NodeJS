@@ -40,6 +40,9 @@ router.post('/', async (req, res) => {
         return;
     }
 
+        // console log new wol start 
+        console.log('[Info] Sending new Wake On Lan ')
+
     // send wol request 
     wol.wake(`${req.body.mac}`, function (error, res) {
         // error 500 for wol not working
@@ -71,6 +74,7 @@ router.post('/', async (req, res) => {
             })
             return;
         }
+        
         // client alive
         // 200 OK - https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200
         res.status(200).json({
