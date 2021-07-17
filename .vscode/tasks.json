@@ -1,0 +1,16 @@
+{
+	"version": "2.0.0",
+	"tasks": [{
+		"label": "Docker Build",
+		"type": "shell",
+		"command": "docker build . -t joshuanoakes1/wol-nodejs"
+	},{
+		"label": "Docker Run",
+		"type": "shell",
+		"command": "docker run -d --name wol -e password=test -p 3001:3000 joshuanoakes1/wol-nodejs"
+	},{
+		"label": "Docker Stop and Destroy",
+		"type": "shell",
+		"command": "docker stop wol && docker rm wol"
+	}]
+}

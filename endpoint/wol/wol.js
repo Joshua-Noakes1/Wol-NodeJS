@@ -41,7 +41,7 @@ router.post('/', async (req, res) => {
     }
 
         // console log new wol start 
-        console.log('[Info] Sending new Wake On Lan ')
+        console.log(`[Info] Sending new Wake On Lan to ${req.body.mac}`)
 
     // send wol request 
     wol.wake(`${req.body.mac}`, function (error, res) {
@@ -60,6 +60,8 @@ router.post('/', async (req, res) => {
 
     // check using ping to see if the client is alive 
     if (req.body.check == 'true') {
+        // console logging that we are checking if the client is alive
+        console.log(`[Info] Checking if ${req.body.ip} (${req.body.mac}) is alive `)
         // ping client 
         var response = await ping.ping(req.body.ip);
 
@@ -74,7 +76,7 @@ router.post('/', async (req, res) => {
             })
             return;
         }
-        
+
         // client alive
         // 200 OK - https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/200
         res.status(200).json({

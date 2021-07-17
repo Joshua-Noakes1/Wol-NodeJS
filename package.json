@@ -11,9 +11,11 @@
     "mongoose": "^5.11.19",
     "morgan": "^1.10.0",
     "ping": "^0.4.1",
+    "serve-favicon": "^2.5.0",
     "wol": "^1.0.7"
   },
   "scripts": {
+    "dev": "nodemon start server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js"
   },
