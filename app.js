@@ -26,9 +26,11 @@ app.use(bodyParser.json());
 
 // Modules
 const wol = require('./lib/wol/wakeOnLan');
+const check = require('./lib/wol/checkIP');
 
 // Endpoints
 app.use('/wol', wol);
+app.use('/check', check);
 
 // Status endpoint
 app.get("/status", (req, res) => {
