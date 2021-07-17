@@ -1,4 +1,4 @@
-name: Docker-CI-MultiArch
+name: Docker-BuildX-CI-MultiArch
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v1
       
-      - name: Build docker image
+      - name: Build Docker image
         env:
           USERNAME: ${{ secrets.DOCKER_USERNAME }}
           REPO: ${{ secrets.DOCKER_REPO }}
