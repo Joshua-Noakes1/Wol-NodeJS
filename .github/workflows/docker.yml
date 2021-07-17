@@ -23,5 +23,8 @@ jobs:
         id: buildx
         uses: docker/setup-buildx-action@v1
       
-      - name: list docker buildx
-        run: docker buildx build . --platform linux/amd64,linux/arm64,linux/arm/v7,linux/arm/v6 -t ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_REPO }} --push
+      - name: Build docker image
+        env:
+          USERNAME: ${{ secrets.DOCKER_USERNAME }}
+          REPO: ${{ secrets.DOCKER_REPO }}
+        run: docker buildx build . --platform linux/amd64,linux/arm64,linux/arm/v7 -t ${USERNAME}/${REPO} --push
