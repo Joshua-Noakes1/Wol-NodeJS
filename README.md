@@ -43,7 +43,7 @@ services:
     container_name: wol-nodejs
     restart: unless-stopped
     environment:
-      - password="Pa55Word!"
+      - password=Pa55Word!
     ports:
       - 3000:3000
 ```
