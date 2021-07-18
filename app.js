@@ -35,7 +35,7 @@ app.use('/check', check);
 // Status endpoint
 app.get("/status", (req, res) => {
     res.status(200).json({
-        "success": true,
+        "success": "true",
         "message": "🚀 The rocket has launched 🚀",
     });
 });
@@ -49,7 +49,7 @@ app.use((req, res, next) => {
 
 app.use((error, req, res, next) => {
     res.status(error.status || 500).json({
-        "success": false,
+        "success": "false",
         "error": {
             "code": error.status || 500,
             "message": error.message,
