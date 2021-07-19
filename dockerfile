@@ -11,6 +11,8 @@ COPY . .
 # Install ping
 RUN apt update && apt install iputils-ping -y
 
-# Expose port 3000 and start server
+# Expose ports 3000, 9 and start server
 EXPOSE 3000
+EXPOSE 9
+
 CMD ["node", "server.js"]
