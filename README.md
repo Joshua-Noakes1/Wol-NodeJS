@@ -30,7 +30,7 @@ Github Actions builds a docker image for Arm32, Arm64 and Amd64 from the NodeJS 
 ### Docker run
 
 ```shell
-    docker run -d --name Wol-NodeJS --restart=unless-stopped -e password=Pa55Word! -e port=3000 -network_node=host ghcr.io/joshua-noakes1/wol-nodejs:master
+    docker run -d --name Wol-NodeJS --restart=unless-stopped -e password=Pa55Word! -e PORT=3000 -network_node=host ghcr.io/joshua-noakes1/wol-nodejs:master
 ```
 
 ### Docker Compose (recomended)
@@ -44,6 +44,6 @@ services:
     restart: unless-stopped
     environment:
       - password=Pa55Word!
-      - port=3000
+      - PORT=3000
     network_mode: host
 ```
