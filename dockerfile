@@ -1,5 +1,5 @@
 # Slim NodeJS image base
-FROM node:16.5.0-slim
+FROM node:lts-alpine3.15
 WORKDIR /usr/src/app
 
 # install nodejs packages
@@ -9,10 +9,9 @@ RUN npm install
 COPY . .
 
 # Install ping
-RUN apt update && apt install iputils-ping -y
+# RUN apt update && apt install iputils-ping -y
 
 # Expose ports 3000, 9 and start server
 EXPOSE 3000
-EXPOSE 9
 
 CMD ["node", "server.js"]
