@@ -5,7 +5,7 @@ name: Docker-BuildX-CI-MultiArch
 on:
   push:
     branches:
-      - 'master'
+      - 'trunk'
 env:
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.repository }}
