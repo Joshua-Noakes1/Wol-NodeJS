@@ -1,5 +1,7 @@
+require('dotenv').config();
+
 const verifyAuth = (req, res, next) => {
-    const apiKey = req.query.apiKey || req.body.apiKey || req.headers['x-api-key'];
+    const apiKey = req.query.apiKey || req.body.apiKey || req.query.password || req.body.password;
 
     if (!apiKey) {
         return res.status(401).json({

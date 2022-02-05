@@ -25,7 +25,7 @@ app.use('/api', require('./api/router'));
 
 // 404 - Page Not Found
 app.use((req, res, next) => {
-    const error = new Error("❌ Page Not Found ❌")
+    const error = new Error("Page Not Found")
     error.status = 404;
     next(error);
 });
@@ -34,10 +34,7 @@ app.use((req, res, next) => {
 app.use((error, req, res, next) => {
     res.status(error.status || 500).json({
         "success": "false",
-        "error": {
-            "code": error.status || 500,
-            "message": error.message,
-        }
+        "message": error.message
     });
 });
 
