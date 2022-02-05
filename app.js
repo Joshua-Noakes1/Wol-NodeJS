@@ -3,7 +3,8 @@ const lcl = require('cli-color'),
     cors = require('cors'),
     morgan = require('morgan'),
     bodyParser = require("body-parser"),
-    favicon = require('serve-favicon')
+    favicon = require('serve-favicon'),
+    path = require('path'),
 express = require('express');
 
 // const global app object
@@ -43,5 +44,5 @@ app.use((error, req, res, next) => {
 // Start the server
 const port = process.env.port || 3000;
 app.listen(port, async function () {
-    console.log(lcl.blue("[Info]"), "Server started on port", lcl.yellow(port));
+    console.log(lcl.blue("[Express - Info]"), "Server started on port", lcl.yellow(port));
 });
