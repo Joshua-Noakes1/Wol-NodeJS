@@ -9,10 +9,10 @@ const lcl = require('cli-color'),
  */
 async function wakeOnLan(macAddress) {
     // console log that we have a new macaddress
-    console.log(lcl.blue("[WOL - Info]"), `Sending WOL packet to "${macAddress}"`);
+    console.log(lcl.blue("[WOL - Info]"), `Trying to send WOL packet to "${macAddress}"`);
 
     // wol request
-    await wol.wake(macAddress).then((wol) => {
+    await wol.wake(macAddress).then(() => {
         console.log(lcl.green("[WOL - Success]"), `Sent WOL packet to "${macAddress}"`);
     }).catch((error) => {
         console.log(lcl.red("[WOL - Error]"), `Failed to send WOL packet to "${macAddress}"`, error);
