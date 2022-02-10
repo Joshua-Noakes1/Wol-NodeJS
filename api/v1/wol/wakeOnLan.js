@@ -1,6 +1,5 @@
 const lcl = require('cli-color'),
     wol = require('wol');
-require('dotenv').config();
 
 /**
  * Send a WOL Packet to a macAddress on the network
