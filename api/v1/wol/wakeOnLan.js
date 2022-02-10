@@ -13,7 +13,9 @@ async function wakeOnLan(macAddress) {
     console.log(lcl.blue("[WOL - Info]"), `Sending WOL packet to "${macAddress}"`);
 
     // wol request
-    await wol.wake(macAddress).catch((error) => {
+    await wol.wake(macAddress).then((wol) => {
+        console.log(lcl.green("[WOL - Success]"), `Sent WOL packet to "${macAddress}"`);
+    }).catch((error) => {
         console.log(lcl.red("[WOL - Error]"), `Failed to send WOL packet to "${macAddress}"`, error);
         return false;
     });
