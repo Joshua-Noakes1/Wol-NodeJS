@@ -19,7 +19,7 @@
   },
   "homepage": "https://github.com/Joshua-Noakes1/Wol-NodeJS#readme",
   "dependencies": {
-    "body-parser": "^1.19.2",
+    "body-parser": "^1.20.0",
     "cli-color": "^2.0.1",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
