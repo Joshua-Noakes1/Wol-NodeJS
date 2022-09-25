@@ -5,13 +5,8 @@ const express = require('express');
 // global express router
 const router = express.Router();
 
-// v1 
-router.get('/', function (req, res) {
-    return res.redirect(307, 'https://github.com/joshua-noakes1/Wol-NodeJS');
-});
-
 // Wake
-router.post('/wol', authModule, async function (req, res) {
+router.post('/', authModule, async function (req, res) {
     // check for mac address
     if (!req.body.mac) {
         console.log(lcl.red("[Express - Error]"), "No mac address provided");
