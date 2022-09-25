@@ -10,7 +10,4 @@ router.get('/', function (req, res) {
 // API versions
 router.use('/v1', require('./v1/router.js'));
 
-// Add v0 API routes here
-router.use('/wol', require('./v0/wol.js'));
-
 module.exports = router;

@@ -22,6 +22,7 @@ app.use(bodyParser.urlencoded({
 
 // express routes
 app.use('/api', require('./api/router'));
+app.use('/wol', require('./api/v0/wol.js'));
 
 // express error handler
 app.use((req, res, next) => {
