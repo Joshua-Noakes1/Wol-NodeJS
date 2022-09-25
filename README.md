@@ -27,7 +27,7 @@ services:
     container_name: Wol-NodeJS
     restart: unless-stopped
     environment:
-      - password=Pa55Word!
+      - KEY=Pa55Word!
       - PORT=3000
     network_mode: host
 ```
@@ -35,5 +35,5 @@ services:
 ### Docker run
 
 ```shell
-    docker run -d --name Wol-NodeJS --restart=unless-stopped -e password=Pa55Word! -e PORT=3000 -network_node=host ghcr.io/joshua-noakes1/wol-nodejs
+    docker run -d --name Wol-NodeJS --restart=unless-stopped -e KEY=Pa55Word! -e PORT=3000 -network_node=host ghcr.io/joshua-noakes1/wol-nodejs
 ```
