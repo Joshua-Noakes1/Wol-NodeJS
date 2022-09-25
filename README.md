@@ -5,6 +5,8 @@ A NodeJS based express server that sends Wake On Lan packets to a client.
 
 ## Usage
 
+Every request to the server gets send to /api/v1/.
+
 ### POST /wol - Wake On Lan
 
 ```json
