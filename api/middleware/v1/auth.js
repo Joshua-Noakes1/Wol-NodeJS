@@ -10,7 +10,7 @@ const verifyAuth = (req, res, next) => {
         });
     }
 
-    if (apiKey !== process.env.apiKey) {
+    if (apiKey !== process.env.KEY) {
         return res.status(401).json({
             "success": "false",
             "message": "Unauthorized",
