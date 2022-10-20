@@ -17,7 +17,7 @@ router.post('/wol', authModule, async function (req, res) {
         console.log(lcl.red("[Express - Error]"), "No mac address provided");
         return res.status(400).json({
             "success": false,
-            "message": "Missing mac address",
+            "message": "❌ Missing MacAddress ❌",
         });
     }
 
@@ -26,7 +26,7 @@ router.post('/wol', authModule, async function (req, res) {
         console.log(lcl.red("[Express - Error]"), "Invalid mac address provided");
         return res.status(400).json({
             "success": false,
-            "message": "Invalid mac address",
+            "message": "❌ Incorrect Mac Address Format | Mac Address must be in format \"01:23:45:67:89:AB\" ❌",
         });
     }
     
@@ -35,14 +35,14 @@ router.post('/wol', authModule, async function (req, res) {
         console.log(lcl.blue("[Express - Info]"), "Woke", lcl.yellow(req.body.mac));
         return res.status(200).json({
             "success": true,
-            "message": "Woke " + req.body.mac,
+            "message": `✔️ Sent WOL packet to "${req.body.macAddress}" ✔️`,
         });
     } catch(err) {
         console.log(lcl.red("[Express - Error]"), err.message);
         console.log(lcl.red("[Express - Error]"), err.stack);
         return res.status(500).json({
             "success": false,
-            "message": "Internal server error",
+            "message": "❌ Internal server error ❌",
         });
     }
 });

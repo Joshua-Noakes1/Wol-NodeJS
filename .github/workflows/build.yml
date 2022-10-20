@@ -3,6 +3,10 @@ name: CI
 
 # Only build on pushes to master and to ghcr:master
 on:
+  workflow_run:
+    workflows: [Update]
+    types:
+      - completed
   push:
     branches:
       - "trunk"

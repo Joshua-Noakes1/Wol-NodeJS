@@ -6,14 +6,14 @@ const verifyAuth = (req, res, next) => {
     if (!apiKey) {
         return res.status(401).json({
             "success": "false",
-            "message": "Unauthorized",
+            "message": "❌ Unauthorized ❌",
         });
     }
 
     if (apiKey !== process.env.KEY) {
         return res.status(401).json({
             "success": "false",
-            "message": "Unauthorized",
+            "message": "❌ Unauthorized ❌",
         });
     }
 
