@@ -35,7 +35,7 @@ router.post('/wol', authModule, async function (req, res) {
         console.log(lcl.blue("[Express - Info]"), "Woke", lcl.yellow(req.body.mac));
         return res.status(200).json({
             "success": true,
-            "message": `✔️ Sent WOL packet to "${req.body.macAddress}" ✔️`,
+            "message": `✔️ Sent WOL packet to "${req.body.mac}" ✔️`,
         });
     } catch(err) {
         console.log(lcl.red("[Express - Error]"), err.message);
