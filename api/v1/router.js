@@ -12,8 +12,10 @@ router.get('/', function (req, res) {
 
 // Wake
 router.post('/wol', authModule, async function (req, res) {
+    var macAddress = req.body.mac;
+
     // check for mac address
-    if (!req.body.mac) {
+    if (!macAddress) {
         console.log(lcl.red("[Express - Error]"), "No mac address provided");
         return res.status(400).json({
             "success": false,
@@ -22,22 +24,22 @@ router.post('/wol', authModule, async function (req, res) {
     }
 
     // check for mac regex
-    if (!req.body.mac.match(/^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/)) {
+    if (!macAddress.match(/^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/)) {
         console.log(lcl.red("[Express - Error]"), "Invalid mac address provided");
         return res.status(400).json({
             "success": false,
             "message": "❌ Incorrect Mac Address Format | Mac Address must be in format \"01:23:45:67:89:AB\" ❌",
         });
     }
-    
+
     try {
-        await wol.wake(req.body.mac);
-        console.log(lcl.blue("[Express - Info]"), "Woke", lcl.yellow(req.body.mac));
+        await wol.wake(macAddress);
+        console.log(lcl.blue("[Express - Info]"), "Woke", lcl.yellow(macAddress));
         return res.status(200).json({
             "success": true,
-            "message": `✔️ Sent WOL packet to "${req.body.mac}" ✔️`,
+            "message": `✔️ Sent WOL packet to "${macAddress}" ✔️`,
         });
-    } catch(err) {
+    } catch (err) {
         console.log(lcl.red("[Express - Error]"), err.message);
         console.log(lcl.red("[Express - Error]"), err.stack);
         return res.status(500).json({
