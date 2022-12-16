@@ -13,6 +13,9 @@ router.get('/', function (req, res) {
 // Wake
 router.post('/wol', authModule, async function (req, res) {
     var macAddress = req.body.mac;
+    if (!macAddress) {
+        macAddress = req.query.mac;
+    }
 
     // check for mac address
     if (!macAddress) {

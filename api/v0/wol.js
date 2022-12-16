@@ -11,6 +11,11 @@ router.post('/', authModule, async function (req, res) {
         macAddress
     } = req.body;
 
+    // if mac address is not in body check query
+    if (!macAddress) {
+        macAddress = req.query.macAddress;
+    }
+
     // check for mac address
     if (!macAddress) {
         console.log(lcl.red("[Express - Error]"), "No mac address provided");
