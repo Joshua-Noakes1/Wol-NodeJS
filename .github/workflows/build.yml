@@ -3,10 +3,6 @@ name: CI
 
 # Only build on pushes to master and to ghcr:master
 on:
-  workflow_run:
-    workflows: [Update]
-    types:
-      - completed
   push:
     branches:
       - "trunk"
@@ -49,7 +45,8 @@ jobs:
         with:
           context: .
           file: ./Dockerfile
-          platforms: linux/amd64,linux/arm64,linux/arm/v7
+          # platforms: linux/amd64,linux/arm64,linux/arm/v7
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ env.REGISTRY_GHCR }}/${{ steps.meta.outputs.tags }}
           cache-from: type=registry,ref=user/app:latest
